@@ -2,26 +2,35 @@ package SpringWithPetr;
 
 import db.DataBase;
 import db.EmptyDB;
-import entity.Mail;
+import entity.Tech;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Controller
 public class IndexController {
+    // Static Resource Config
 
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        // Css resource.
+        registry.addResourceHandler("/img/**") //
+                .addResourceLocations("/resources/static/").setCachePeriod(31556926);
+
+    }
     private DataBase db = new EmptyDB();
 
     @GetMapping("/delete/{id}")
-    public String getMail(@PathVariable int id) {
-        db.deleteMail(id);
+    public String getTech(@PathVariable int id) {
+        db.deleteTech(id);
         return "redirect:/";
     }
 
     @PostMapping("/edit/{id}")
-    public String editMail(@PathVariable int id, @ModelAttribute Mail mail) {
-        if (!mail.getSubject().equals("") && !mail.getText().equals("")) {
-            db.editMail(id, mail);
+    public String editTech(@PathVariable int id, @ModelAttribute Tech Tech) {
+        if (!Tech.getName().equals("") && !Tech.getCost().equals("") && !Tech.getDvig().equals("") && !Tech.getGruz().equals("") && !Tech.getMarka().equals("") && !Tech.getMassa().equals("")) {
+            db.editTech(id, Tech);
             return "redirect:/";
         } else {
             return "error";
@@ -29,16 +38,16 @@ public class IndexController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editMail(@PathVariable int id, Model m) throws Exception {
-        Mail mail = db.getMail(id);
-        m.addAttribute("mail", mail);
+    public String editTech(@PathVariable int id, Model m) throws Exception {
+        Tech Tech = db.getTech(id);
+        m.addAttribute("tech", Tech);
         return "edit";
     }
 
     @PostMapping("/create")
-    public String createMail(@ModelAttribute Mail mail) {
-        if (!mail.getSubject().equals("") && !mail.getText().equals("")) {
-            db.saveMail(mail);
+    public String createTech(@ModelAttribute Tech Tech) {
+        if (!Tech.getName().equals("") && !Tech.getCost().equals("") && !Tech.getDvig().equals("") && !Tech.getGruz().equals("") && !Tech.getMarka().equals("") && !Tech.getMassa().equals("")) {
+            db.saveTech(Tech);
             return "redirect:/";
         } else {
             return "error";
@@ -46,13 +55,13 @@ public class IndexController {
     }
 
     @GetMapping("/create")
-    public String createMail() {
+    public String createTech() {
         return "create";
     }
 
     @GetMapping("/")
     public String index(Model m) {
-        m.addAttribute("mails", db.getMails());
+        m.addAttribute("techs", db.getTechs());
         return "index";
     }
 }

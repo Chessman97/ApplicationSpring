@@ -2,52 +2,92 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Письма</title>
+    <title>Добавить товар</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">java-mail</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top"  style="background-color:#563d7c">
+    <a class="navbar-brand" href="#">СпецТех</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbar1">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="/">Все письма</a>
+                <a class="nav-link" href="/">Каталог</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/create">Новое письма</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="/create">Добавить товар</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Спецтехника
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Автомобили с КМУ</a>
+                    <a class="dropdown-item" href="#">Автоцистерны</a>
+                    <a class="dropdown-item" href="#">Мультилифты</a>
+                    <a class="dropdown-item" href="#">Эвакуаторы</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Для социальных служб</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Контакты</a>
+            </li>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button>
+            </form>
+        </ul>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal1" >Вход</button>
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal">Регистрация</button>
+        </div>
         </ul>
     </div>
 </nav>
 
-<h1 class="p-3">Создать письмо</h1>
+<div class="container"><h1 class="p-3">Добавить товар</h1></div>
+<div class="container">
+<form method="POST" class="m-3" th:object="${tech}">
 
-<form method="POST" class="m-3" th:object="${mail}">
+    <div class="form-group">
+        <label>Название спецтехники</label>
+        <input type="text" class="form-control" name="name" id="name_input">
+    </div>
 
-<!--    {% csrf-field %}-->
-
-    <h5>
-        <label>Заголовок:</label><br>
-        <input type="text" name="subject" placeholder="Заголовок письма">
-    </h5>
-
-    <h5>
-        <label>Текст:</label><br>
-        <textarea name="text" placeholder="Текст письма в формате HTML"></textarea>
-    </h5>
-
-    <button class="btn btn-dark" type="submit" value="Создать">Создать</button>
+    <div class="form-group">
+        <label>Название марки</label>
+        <input type="text" class="form-control" name="marka" id="marka_input"/>
+    </div>
+    <div class="form-group">
+        <label>Грузоподьёмность (кг)</label>
+        <input type="text" class="form-control" name="gruz" id="gruz_input"/>
+    </div>
+    <div class="form-group">
+        <label>Полная масса (кг)</label>
+        <input type="text" class="form-control" name="massa" id="massa_input"/>
+    </div>
+    <div class="form-group">
+        <label>Мощность двигателя (л.с.)</label>
+        <input type="text" class="form-control" name="dvig" id="dvig_input"/>
+    </div>
+    <div class="form-group">
+        <label>Цена (тыс. руб.)</label>
+        <input type="text" class="form-control" name="cost" id="cost_input"/>
+    </div>
+    <button type="button" class="btn btn-secondary" href="/" >Отмена</button>
+    <button type="submit" class="btn btn-primary" value="Добавить">Добавить</button>
 
 </form>
-
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

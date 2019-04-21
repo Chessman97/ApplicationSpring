@@ -2,48 +2,87 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Письма</title>
+    <title>Специальная техника</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">java-mail</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top"  style="background-color:#563d7c">
+    <a class="navbar-brand" href="#">СпецТех</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbar1">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item">
-                <a class="nav-link" href="/">Все письма</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Каталог</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/create">Новое письма</a>
+                <a class="nav-link" href="/create">Добавить товар</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Спецтехника
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Автомобили с КМУ</a>
+                    <a class="dropdown-item" href="#">Автоцистерны</a>
+                    <a class="dropdown-item" href="#">Мультилифты</a>
+                    <a class="dropdown-item" href="#">Эвакуаторы</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Для социальных служб</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Контакты</a>
+            </li>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button>
+            </form>
+        </ul>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal1" >Вход</button>
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal">Регистрация</button>
+        </div>
         </ul>
     </div>
 </nav>
 
-<h1 class="p-3">Письма</h1>
-
+<div class="container"> <h1 class="p-3">Каталог товаров</h1> </div>
+<div class="container">
 <ul class="pr-5">
-    <div th:each="m : ${mails}" class="card-columns">
-<!--        <a th:each="m : ${mails}" th:href="@{/mail/{id}(id=${m.id})}" class="card-link">-->
-            <div class="card m-3">
+    <div class="card-deck mb-3 text-center">
+    <div th:each="m : ${techs}">
+        <div class="card mb-2 shadow-sm" id="del{{ tech.id }}">
+<!--        <a th:each="m : ${techs}" th:href="@{/tech/{id}(id=${m.id})}" class="card-link">-->
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal" id="nameform" th:text="${m.marka}"></h4>
+        </div>
                 <div class="card-body">
-                    <h4 class="card-title" th:text="${m.subject}"></h4>
-                    <h6 class="card-title" th:text="${m.text}"></h6>
-                    <a th:href="@{/edit/{id}(id=${m.id})}" class="card-link">Редактировать</a>
-                    <a th:href="@{/delete/{id}(id=${m.id})}" class="card-link">Удалить</a>
+                    <h2 class="card-title pricing-card-title" th:text="${m.marka}"><small class="text-muted"> <p th:text="${m.marka}"></pth:text></p></small></h2>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><img src="/img/kmu.jpg" width="190" height="100" alt="КМУ"></li>
+                        <li> <b>Грузоподьёмность (кг) :</b> <h3 th:text="${m.gruz}"></h3> </li>
+                        <li> <b>Полная масса (кг) :</b> <h3 th:text="${m.massa}"></h3></li>
+                        <li> <b>Мощность двигателя (л.с.) :</b> <h3 th:text="${m.dvig}"></h3></li>
+                        <li> <b>Цена (тыс. руб.) :</b> <h3 th:text="${m.cost}"></h3></li>
+                    </ul>
+
+                   <a class="btn btn-lg btn-block btn-outline-primary"th:href="@{/edit/{id}(id=${m.id})}">Редактировать</a>
+                   <a class="btn btn-lg btn-block btn-outline-danger" th:href="@{/delete/{id}(id=${m.id})}">Удалить</a>
                 </div>
-            </div>
-<!--        </a>-->
+        </div>
     </div>
+    </div>
+
 </ul>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,58 +1,62 @@
 package db;
 
 import db.DataBase;
-import entity.Mail;
+import entity.Tech;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class EmptyDB implements DataBase {
 
-    private List<Mail> mails = new LinkedList<>();
+    private List<Tech> techs = new LinkedList<>();
 
     public EmptyDB() {
-        mails.add(new Mail((long) 1, "s1", "t1"));
-        mails.add(new Mail((long) 2, "s2", "t2"));
-        mails.add(new Mail((long) 3, "s3", "t3"));
-        mails.add(new Mail((long) 4, "s4", "t4"));
+        techs.add(new Tech((long) 1, "КМУ", "Kamaz","100000", "33000", "340", "2300"));
+        techs.add(new Tech((long) 2, "КАМАЗ", "Kamaz","100000", "33000", "340", "2300"));
+        techs.add(new Tech((long) 3, "КАМАЗ", "Kamaz","100000","33000", "340", "2300"));
+        techs.add(new Tech((long) 4, "КМУ", "Kamaz","100000","33000", "340", "2300"));
     }
 
     @Override
-    public Mail getMail(int id) throws Exception {
-        for (int i = 0; i < mails.size(); i++) {
-            if (mails.get(i).getId() == id) {
-                return mails.get(i);
+    public Tech getTech(int id) throws Exception {
+        for (int i = 0; i < techs.size(); i++) {
+            if (techs.get(i).getId() == id) {
+                return techs.get(i);
             }
         }
         throw new Exception("Нету в базе");
     }
 
     @Override
-    public void deleteMail(int id) {
-        for (int i = 0; i < mails.size(); i++) {
-            if (mails.get(i).getId() == id) {
-                mails.remove(i);
+    public void deleteTech(int id) {
+        for (int i = 0; i < techs.size(); i++) {
+            if (techs.get(i).getId() == id) {
+                techs.remove(i);
                 return;
             }
         }
     }
 
     @Override
-    public List<Mail> getMails() {
-        return mails;
+    public List<Tech> getTechs() {
+        return techs;
     }
 
     @Override
-    public void saveMail(Mail mail) {
-        mails.add(mail);
+    public void saveTech(Tech Tech) {
+        techs.add(Tech);
     }
 
     @Override
-    public void editMail(int id, Mail mail) {
-        for (int i = 0; i < mails.size(); i++) {
-            if (mails.get(i).getId() == id) {
-                mails.get(i).setSubject(mail.getSubject());
-                mails.get(i).setText(mail.getText());
+    public void editTech(int id, Tech Tech) {
+        for (int i = 0; i < techs.size(); i++) {
+            if (techs.get(i).getId() == id) {
+                techs.get(i).setName(Tech.getName());
+                techs.get(i).setMarka(Tech.getMarka());
+                techs.get(i).setMassa(Tech.getMassa());
+                techs.get(i).setGruz(Tech.getGruz());
+                techs.get(i).setDvig(Tech.getDvig());
+                techs.get(i).setCost(Tech.getCost());
                 System.out.println("edit");
                 return;
             }

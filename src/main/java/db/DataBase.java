@@ -1,17 +1,17 @@
 package db;
 
-import entity.Mail;
+import entity.Tech;
 
 import java.util.List;
 
 public interface DataBase {
-    Mail getMail(int id) throws Exception;
+    Tech getTech(int id) throws Exception;
 
-    void deleteMail(int id);
+    void deleteTech(int id);
 
-    List<Mail> getMails();
+    List<Tech> getTechs();
 
-    void saveMail(Mail mail);
+    void saveTech(Tech Tech);
 
-    void editMail(int id, Mail mail);
+    void editTech(int id, Tech Tech);
 }
